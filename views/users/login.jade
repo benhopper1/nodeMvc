@@ -18,8 +18,7 @@ block content
 
 
 script(type='text/javascript', src='/js/' + 'ajaxcomm.js')
-table
-    <tr><td> #{customData.tester()} </tr></td>     
+
 center
 
     block sidebar
@@ -39,8 +38,8 @@ center
             input(id="tb_password" type="textbox" name="password", value="---x-")
         <br>
 
-        button(id="bt_ok" type="button" class="magic" onclick="doAjax();") OK
-        button(id="bt_cancel" type="button" class="magic" onclick="doAjax2();") CANCEL
+        button(id="bt_ok" type="button" class="magic" onclick="doAjaxLogin();") OK
+        button(id="bt_cancel" type="button" class="magic" onclick="") CANCEL
 
         <br>
 
@@ -49,12 +48,7 @@ center
     
 
 script.    
-    var dataJ = {
-                    userName:'xMen'
-                };
-    
-    //testing functions-----
-    function doAjax(){
+    function doAjaxLogin(){
         var userName = document.getElementById("tb_userName").value;
         var password = document.getElementById("tb_password").value;
         var ajxObj = new AjaxJsonPostObject(
@@ -76,38 +70,9 @@ script.
                 password:document.getElementById("tb_password").value
 
             }
-        );
-
-        
+        );        
     }
-
-    function doAjax2(){
-        console.log('doAjax2 click--');        
-        var customData = #{customData.tester2};        
-        customData();        
-        console.log("base:"+"#{customData.basePath}");
-
-        //test ajax----
-        ajxObj = new AjaxJsonPostObject(
-            {
-                url:'/login',
-                onSuccess:function(inResponseText){
-                    console.log("onSuccess:"+inResponseText);
-                },
-                onFail:function(inError, inStatusText){
-                    console.log("onFail:"+inError+", "+inStatusText);
-                }
-
-            }
-        );
-
-        ajxObj.send(
-            {
-                userName:'xBenHop'
-
-            }
-        );
-    }
+    
 
 
     
