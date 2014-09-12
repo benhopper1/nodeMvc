@@ -22,7 +22,6 @@ var Model = function(){
 	}
 
 	this.verifyAndGetUserData = function(inData){		
-		var userId;
 		_this.verifyUserPassword(inData.userName, inData.password, function(inErr, inRows, inFields){
 			if(inRows.length > 0){
 				//---user && password == good
@@ -64,8 +63,7 @@ var Model = function(){
 			if(inData.requestRef.cookies.deviceId){
 				console.log("deviceId cookie exist");
 				//verify id
-				_this.verifyDeviceId(inData.userRecord.id, inData.requestRef.cookies.deviceId, function(inExist){
-					//testerror here--
+				_this.verifyDeviceId(inData.userRecord.id, inData.requestRef.cookies.deviceId, function(inExist){					
 					// check count
 					if(inExist){
 						//store in cookie
