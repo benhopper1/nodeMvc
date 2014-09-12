@@ -6,6 +6,9 @@ var path = require('path');
 var app = express();
 var fs = require('fs');
 
+//----readin my secrets /git ignored conf file-----
+var configData = fs.readFileSync('arfmvc.conf', 'utf8');
+configData = JSON.parse(configData);
 
 var basePath = path.dirname(require.main.filename);
 console.log('basePath:'+basePath);
@@ -25,13 +28,13 @@ var router = require('/nodejs_modules/node_modules/router')();
 
 //TODO: --build db connection HERE--------
 var Connection = require(__dirname + '/models/connection.js');
-//---done statically here so connection will be prepared for future
+//---done statically here so connection will be prepared for future and share
 var connection = Connection.getMaybeCreate(
 	{
 		instanceName:'arf',
 		host:'127.0.0.1',
-		user:'basicUser',
-		password:'-p-a-s-s',
+		user:configData.mysqlServerConnection.user,
+		password:configData.mysqlServerConnection.password,
 		database:'newWally'
 
 	}
